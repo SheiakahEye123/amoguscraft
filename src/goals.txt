@@ -1,0 +1,7 @@
+Create a ripoff copy of Minecraft
+Can have worse world gen
+Will be 3D
+Rendering
+World Saves
+Slightly Playable
+Meaning, inventory, crafting, blocks.Block, textures(we will see), movement, etc... Potential only maybe not
