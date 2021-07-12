@@ -35,10 +35,10 @@ public class WASDListener implements KeyListener {
             canvas.y2 -= 10;
         }
         if (w.getKeyCode() == KeyEvent.VK_J) {
-            canvas.testAngleHor -= 0.01;
+            canvas.testAngleHor -= 0.1;
         }
         if (w.getKeyCode() == KeyEvent.VK_L) {
-            canvas.testAngleHor += 0.01;
+            canvas.testAngleHor += 0.1;
         }
     }
 
