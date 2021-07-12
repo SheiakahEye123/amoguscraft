@@ -1,8 +1,10 @@
 import blocks.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyListener;
 import java.security.Key;
+import java.util.ArrayList;
 
 public class amoguscraft {
     public static void main(String[] args) {
@@ -12,11 +14,12 @@ public class amoguscraft {
         wood wood = new wood(3,0,0);
         bedrock bedrock = new bedrock(4,0,0);
         JFrame frame = new JFrame("amogus");
+        double sussybaka = 2;
 
         //window.setSize(1920, 1080);
         frame.setSize(500, 500);
 
-        ModdedPanel canvas = new ModdedPanel();
+        ModdedPanel canvas = null;
 
         frame.addKeyListener(new WASDListener(canvas));
         frame.add(canvas);
@@ -24,10 +27,12 @@ public class amoguscraft {
         frame.setVisible(true);
 
         System.out.println("finished setup");
+        ArrayList<point> points = new ArrayList<point>();
+        point first = new point(5,5,2,7);
+        points.add(first);
 
         while (true) {
             canvas.repaint();
         }
-
     }
 }
