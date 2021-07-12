@@ -6,14 +6,15 @@ import java.sql.SQLOutput;
 import java.util.*;
 
 public class ModdedPanel<first> extends JPanel {
+    ArrayList<point> points;
     ModdedPanel(ArrayList<point> points) {
         this.points = points;
     }
+    double testAngleHor = 0;
     @Override
     protected void paintComponent(Graphics brush) {
         // call the paintComponent method in JPanel (clear screen)
         super.paintComponent(brush);
-        double testAngleHor = 0;
         // rotate the points around the player
         //point3DRotation rotation = math.point3DRotation(x,y,z,testAngleHor);
         //point3DRotation rotation2 = math.point3DRotation(x2,y2,z2,testAngleHor);
@@ -30,7 +31,7 @@ public class ModdedPanel<first> extends JPanel {
             brush.fillOval(
                     (int)(point.screenx*100) + getHeight()/2,
                     (int)(point.screeny*100) + getWidth()/2,
-                    (int)(200*(1/x)),(int)(200*(1/x)));
+                    (int)(200*(1/points.get(index).x)),(int)(200*(1/points.get(index).x)));
         }
         repaint();
     }
