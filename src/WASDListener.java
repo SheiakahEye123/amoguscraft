@@ -15,24 +15,30 @@ public class WASDListener implements KeyListener {
             canvas.x2 -= 1;
         }
         if (w.getKeyCode() == KeyEvent.VK_A) {
-            canvas.z += 100;
-            canvas.z2 += 100;
+            canvas.z += 1;
+            canvas.z2 += 1;
         }
         if (w.getKeyCode() == KeyEvent.VK_S) {
             canvas.x += 1;
             canvas.x2 += 1;
         }
         if (w.getKeyCode() == KeyEvent.VK_D) {
-            canvas.z -= 100;
-            canvas.z2 -= 100;
+            canvas.z -= 1;
+            canvas.z2 -= 1;
         }
         if (w.getKeyCode() == KeyEvent.VK_SHIFT) {
-            canvas.y -= 100;
-            canvas.y2 -= 100;
+            canvas.y += 10;
+            canvas.y2 += 10;
         }
         if (w.getKeyCode() == KeyEvent.VK_SPACE) {
-            canvas.y -= 100;
-            canvas.y2 -= 100;
+            canvas.y -= 10;
+            canvas.y2 -= 10;
+        }
+        if (w.getKeyCode() == KeyEvent.VK_J) {
+            canvas.testAngleHor -= 0.01;
+        }
+        if (w.getKeyCode() == KeyEvent.VK_L) {
+            canvas.testAngleHor += 0.01;
         }
     }
 
