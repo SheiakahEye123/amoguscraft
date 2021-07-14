@@ -12,8 +12,9 @@ public class MouseListener implements java.awt.event.MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        double x = e.getX();
-        double y = e.getY();
+        double mousex = e.getX();
+        double mousey = e.getY();
+        System.out.println(mousex + "//" + mousey);
         point sussy = new point(5,5,2,7);
         points.add(sussy);
     }

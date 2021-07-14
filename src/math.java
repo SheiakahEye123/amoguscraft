@@ -1,10 +1,11 @@
 public class math {
-    static point3DRotation point3DRotation(double x, double y, double z, double angle) {
-        double newZ = z * Math.cos(angle) - x * Math.sin(angle);
-        double newX = z * Math.sin(angle) + x * Math.cos(angle);
+    static point3DRotation point3DRotation(double x, double y, double z, double horangle, double verangle) {
+        double newZ = z * Math.cos(horangle) - x * Math.sin(horangle);
+        double newX = z * Math.sin(horangle) + x * Math.cos(horangle);
+        double newY = z * Math.sin(verangle) + x * Math.cos(verangle);
         point3DRotation returnPoint = new point3DRotation();
         returnPoint.x = newX;
-        returnPoint.y = y;
+        returnPoint.y = newY;
         returnPoint.z = newZ;
         return returnPoint;
     }

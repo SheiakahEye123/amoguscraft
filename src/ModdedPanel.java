@@ -11,6 +11,8 @@ public class ModdedPanel<first> extends JPanel {
         this.points = points;
     }
     double testAngleHor = 0;
+    double testAngleVer = 0;
+
     @Override
     protected void paintComponent(Graphics brush) {
         // call the paintComponent method in JPanel (clear screen)
@@ -25,8 +27,8 @@ public class ModdedPanel<first> extends JPanel {
 
         // point #1 draw
         for (int index = 0; index < points.size(); index += 1) {
-            point3DRotation rotation = math.point3DRotation(points.get(index).x,points.get(index).y,points.get(index).z,testAngleHor);
-            project3Dto2D point = math.project3Dto2D(rotation.x,points.get(index).y,rotation.z);
+            point3DRotation rotation = math.point3DRotation(points.get(index).x,points.get(index).y,points.get(index).z,testAngleHor,testAngleVer);
+            project3Dto2D point = math.project3Dto2D(rotation.x,rotation.y,rotation.z);
             brush.setColor(Color.black);
             brush.fillOval(
                     (int)(point.screenx*100) + getHeight()/2,

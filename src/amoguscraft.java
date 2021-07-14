@@ -14,9 +14,11 @@ public class amoguscraft {
         wood wood = new wood(3,0,0);
         bedrock bedrock = new bedrock(4,0,0);
         JFrame frame = new JFrame("amogus");
-
         //window.setSize(1920, 1080);
         frame.setSize(500, 500);
+        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
+        frame.setVisible(true);
         System.out.println("finished setup");
         ArrayList<point> points = new ArrayList<point>();
         point first = new point(5,5,2,7);
