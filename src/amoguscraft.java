@@ -17,15 +17,14 @@ public class amoguscraft {
 
         //window.setSize(1920, 1080);
         frame.setSize(500, 500);
-
-        ModdedPanel canvas = null;
-
         System.out.println("finished setup");
         ArrayList<point> points = new ArrayList<point>();
         point first = new point(5,5,2,7);
         points.add(first);
 
-        frame.addKeyListener(new WASDListener(points));
+        ModdedPanel canvas = new ModdedPanel(points);
+        frame.addKeyListener(new WASDListener(points, canvas));
+        frame.addMouseListener(new MouseListener(points, canvas));
         frame.add(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
