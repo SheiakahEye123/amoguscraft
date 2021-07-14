@@ -30,10 +30,17 @@ public class ModdedPanel<first> extends JPanel {
             point3DRotation rotation = math.point3DRotation(points.get(index).x,points.get(index).y,points.get(index).z,testAngleHor,testAngleVer);
             project3Dto2D point = math.project3Dto2D(rotation.x,rotation.y,rotation.z);
             brush.setColor(Color.black);
-            brush.fillOval(
+            //brush.fillOval(
+                    //(int)(point.screenx*100) + getHeight()/2,
+                    //(int)(point.screeny*100) + getWidth()/2,
+                    //(int)(200*(1/points.get(index).x)),(int)(200*(1/points.get(index).x)));
+            brush.fill3DRect(
                     (int)(point.screenx*100) + getHeight()/2,
                     (int)(point.screeny*100) + getWidth()/2,
-                    (int)(200*(1/points.get(index).x)),(int)(200*(1/points.get(index).x)));
+                    (int)(200*(1/points.get(index).x)),
+                    (int)(200*(1/points.get(index).x)),
+                    false);
+
         }
         repaint();
     }

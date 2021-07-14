@@ -15,7 +15,7 @@ public class MouseListener implements java.awt.event.MouseListener {
         double mousex = e.getX();
         double mousey = e.getY();
         System.out.println(mousex + "//" + mousey);
-        point sussy = new point(5,5,2,7);
+        point sussy = new point(0,0,-3,7);
         points.add(sussy);
     }
 
