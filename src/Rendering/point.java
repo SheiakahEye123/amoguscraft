@@ -1,9 +1,8 @@
+package Rendering;
+
 public class point {
-    double x;
-    double y;
-    double z;
-    double size;
-    point(double x, double y, double z, double size) {
+    public double x,y,z,size;
+    public point(double x, double y, double z, double size) {
         this.x = x;
         this.z = z;
         this.y = y;

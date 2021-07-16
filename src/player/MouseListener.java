@@ -1,22 +1,26 @@
+package player;
+
+import Rendering.ModdedPanel;
+import Rendering.point;
+import blocks.Block;
+
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class MouseListener implements java.awt.event.MouseListener {
-    ArrayList<point> points = new ArrayList<point>();
-    MouseListener (ArrayList<point> points, ModdedPanel canvas) {
-        this.points = points;
+    ArrayList<Block> blocks = new ArrayList<>();
+    public MouseListener(ArrayList<Block> points, ModdedPanel canvas) {
+        this.blocks = points;
         this.canvas = canvas;
     }
 
-    ModdedPanel canvas = new ModdedPanel(points);
+    ModdedPanel canvas = new ModdedPanel(blocks);
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        double mousex = e.getX();
-        double mousey = e.getY();
-        System.out.println(mousex + "//" + mousey);
-        point sussy = new point(0,0,-3,7);
-        points.add(sussy);
+        //double mousex = e.getX();
+        //double mousey = e.getY();
+        //System.out.println(mousex + "//" + mousey);
     }
 
     @Override
