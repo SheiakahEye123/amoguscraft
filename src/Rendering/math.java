@@ -19,12 +19,8 @@ public class math {
     }
     public static project3Dto2D project3Dto2D(double x, double y, double z) {
         project3Dto2D returnPoint = new project3Dto2D();
-        if (x < 0) {
-            returnPoint.behind = true;
-        }
         if(Math.abs(x) < 1e-4)
             x = 0.0001;
-
         double screeny = (y/x) * 200 + 250;
         double screenx = (z/x) * 200 + 250;
         returnPoint.screenx = screenx;

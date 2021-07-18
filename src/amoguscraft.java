@@ -22,7 +22,7 @@ public class amoguscraft {
         frame.setVisible(true);
         System.out.println("finished setup");
         ArrayList<Block> blocks = new ArrayList<Block>();
-        blocks.add(new Block(4,0,0,0, null));
+        blocks.add(new Block(4,0,0,0, "sussyblock"));
 
         ModdedPanel canvas = new ModdedPanel(blocks);
         frame.addKeyListener(new WASDListener(blocks, canvas));
