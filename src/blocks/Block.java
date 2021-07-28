@@ -45,7 +45,7 @@ public class Block {
         topFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
         topFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
         topFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
-        brush.setColor(new Color(102,51,0));
+        brush.setColor(new Color(0,100,32 ));
         if (!localbehind) {
             brush.fillPolygon(topFace);
         }
