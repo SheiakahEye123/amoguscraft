@@ -28,82 +28,81 @@ public class Block {
 
     public void pointRendering(double testAngleHor, double testAngleVer, Graphics brush) {
         project3Dto2D[] sussy2DArray = new project3Dto2D[8];
-
         for (int index = 0; index < sussyList.length; index += 1) {
+            localbehind = false;
             point3DRotation rotation = math.point3DRotation(sussyList[index].x + x, sussyList[index].y + y, sussyList[index].z + z, testAngleHor, testAngleVer);
-            project3Dto2D pointforpoly = math.project3Dto2D(rotation.x,rotation.y,rotation.z);
-            sussy2DArray[index] = pointforpoly;
-            if (x > 0) {
-                localbehind = false;
-            }
-            else if (x <= 0) {
+            if (rotation.x > 0) {
+                project3Dto2D pointforpoly = math.project3Dto2D(rotation.x, rotation.y, rotation.z);
+                sussy2DArray[index] = pointforpoly;
+            } else if (rotation.x <= 0) {
                 localbehind = true;
             }
+
         }
         Polygon topFace = new Polygon(), leftFace = new Polygon(), rightFace = new Polygon(), bottomFace = new Polygon(), backFace = new Polygon(), frontFace = new Polygon();
-        topFace.addPoint((int) sussy2DArray[4].screenx, (int) sussy2DArray[4].screeny);
-        topFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
-        topFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
-        topFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
-        brush.setColor(new Color(0,100,32 ));
         if (!localbehind) {
+            topFace.addPoint((int) sussy2DArray[4].screenx, (int) sussy2DArray[4].screeny);
+            topFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
+            topFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
+            topFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
+            brush.setColor(new Color(0,100,32 ));
             brush.fillPolygon(topFace);
         }
         else if (localbehind) {
         }
-
-        bottomFace.addPoint((int) sussy2DArray[0].screenx, (int) sussy2DArray[0].screeny);
-        bottomFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
-        bottomFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
-        bottomFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
-        brush.setColor(new Color(102,51,0));
         if (!localbehind) {
             brush.fillPolygon(bottomFace);
+            bottomFace.addPoint((int) sussy2DArray[0].screenx, (int) sussy2DArray[0].screeny);
+            bottomFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
+            bottomFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
+            bottomFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
+            brush.setColor(new Color(102,51,0));
         }
         else if (localbehind) {
         }
-        backFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
-        backFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
-        backFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
-        backFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
-        brush.setColor(new Color(102,51,0));
         if (!localbehind) {
+            backFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
+            backFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
+            backFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
+            backFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
+            brush.setColor(new Color(102,51,0));
             brush.fillPolygon(backFace);
         }
         else if (localbehind) {
         }
-        frontFace.addPoint((int) sussy2DArray[4].screenx, (int) sussy2DArray[4].screeny);
-        frontFace.addPoint((int) sussy2DArray[0].screenx, (int) sussy2DArray[0].screeny);
-        frontFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
-        frontFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
-        brush.setColor(new Color(102,51,0));
         if (!localbehind) {
+            frontFace.addPoint((int) sussy2DArray[4].screenx, (int) sussy2DArray[4].screeny);
+            frontFace.addPoint((int) sussy2DArray[0].screenx, (int) sussy2DArray[0].screeny);
+            frontFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
+            frontFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
+            brush.setColor(new Color(102,51,0));
             brush.fillPolygon(frontFace);
         }
         else if (localbehind) {
         }
-        leftFace.addPoint((int) sussy2DArray[4].screenx, (int) sussy2DArray[4].screeny);
-        leftFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
-        leftFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
-        leftFace.addPoint((int) sussy2DArray[0].screenx, (int) sussy2DArray[0].screeny);
-        brush.setColor(new Color(102,51,0));
         if (!localbehind) {
+            leftFace.addPoint((int) sussy2DArray[4].screenx, (int) sussy2DArray[4].screeny);
+            leftFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
+            leftFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
+            leftFace.addPoint((int) sussy2DArray[0].screenx, (int) sussy2DArray[0].screeny);
+            brush.setColor(new Color(102,51,0));
             brush.fillPolygon(leftFace);
         }
         else if (localbehind) {
         }
-        rightFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
-        rightFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
-        rightFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
-        rightFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
-        brush.setColor(new Color(102,51,0));
         if (!localbehind) {
+            rightFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
+            rightFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
+            rightFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
+            rightFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
+            brush.setColor(new Color(102,51,0));
             brush.fillPolygon(leftFace);
         }
         else if (localbehind) {
+        }
         }
         //System.out.println("block is drawing. one point is at " + sussy2DArray[0].screenx + " " + sussy2DArray[0].screeny);
-    }
+
     public Block(double x, double y, double z, double Hardness, String id){
         this.x = x;
         this.y = y;
