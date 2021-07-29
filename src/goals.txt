@@ -1,7 +1,7 @@
 Create a ripoff copy of Minecraft
-Can have worse world gen
+Can have worse World.World gen
 Will be 3D
 Rendering
-World Saves
+World.World Saves
 Slightly Playable
 Meaning, inventory, crafting, blocks.Block, textures(we will see), movement, etc... Potential only maybe not

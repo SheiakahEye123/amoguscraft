@@ -14,7 +14,7 @@ public class MouseListener implements java.awt.event.MouseListener {
         this.canvas = canvas;
     }
 
-    ModdedPanel canvas = new ModdedPanel(blocks);
+    ModdedPanel canvas;
 
     @Override
     public void mouseClicked(MouseEvent e) {
