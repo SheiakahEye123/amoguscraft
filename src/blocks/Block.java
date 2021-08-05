@@ -25,6 +25,10 @@ public class Block {
     String id;
     boolean isVisible;
 
+    public double distance() {
+        return Math.sqrt(x * x + y * y + z * z);
+    }
+
     public void pointRendering(double testAngleHor, double testAngleVer, Graphics brush) {
         project3Dto2D[] sussy2DArray = new project3Dto2D[8];
         point3DRotation[] sussy3DArray = new point3DRotation[8];
@@ -66,7 +70,7 @@ public class Block {
                 bottomFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
                 bottomFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
                 bottomFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
-                brush.setColor(new Color(255, 195, 0));
+                brush.setColor(new Color(34,139,34));
                 brush.fillPolygon(bottomFace);
             }
             if (sussyList[7].x + x <= 0) {

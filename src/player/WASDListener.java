@@ -8,7 +8,6 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class WASDListener implements KeyListener{
-
     ArrayList<Block> blocks = new ArrayList<>();
     double speed = 0.6;
     public WASDListener(ArrayList<Block> points, ModdedPanel canvas) {
@@ -17,58 +16,68 @@ public class WASDListener implements KeyListener{
     }
 
     ModdedPanel canvas;
+    boolean hitting(double x, double y, double z) {
+        return (x <= 0.75 && x >= -0.75 && z <= 0.75 && z >= -0.75 && y <= 0.75 && y >= -1.75);
+    }
+
+    boolean hittingAnyBlock(ArrayList<Block> block, double movedX, double movedZ, double movedY) {
+        for (int index = 0; index < blocks.size(); index += 1){
+            if (hitting(blocks.get(index).x - movedX, blocks.get(index).y - movedY,blocks.get(index).z - movedZ)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
     public void keyPressed(KeyEvent w) {
-        point3DRotation forward = new point3DRotation();
-        forward.x = speed;
-        forward.y = 0;
-        forward.z = 0;
+        point3DRotation forward = new point3DRotation(speed,0,0);
+
+        point3DRotation WASDmove = new point3DRotation(0,0,0);
 
         point3DRotation rotatedForward = math.point3DRotation(forward.x, forward.y, forward.z, canvas.testAngleHor * -1, 0);
         if (w.getKeyCode() == KeyEvent.VK_W) {
-            for (int index = 0; index < blocks.size(); index += 1) {
-                blocks.get(index).x -= rotatedForward.x;
-                blocks.get(index).z -= rotatedForward.z;
-            }
+            WASDmove.increaseBy(rotatedForward);
         }
-        point3DRotation left = new point3DRotation();
+
         forward.x = 0;
         forward.y = 0;
         forward.z = speed * -1;
 
         point3DRotation rotatedLeft = math.point3DRotation(forward.x, forward.y, forward.z, canvas.testAngleHor * -1, 0);
         if (w.getKeyCode() == KeyEvent.VK_A) {
-            for (int index = 0; index < blocks.size(); index += 1) {
-                blocks.get(index).x -= rotatedLeft.x;
-                blocks.get(index).z -= rotatedLeft.z;
-            }
+            WASDmove.increaseBy(rotatedLeft);
         }
         if (w.getKeyCode() == KeyEvent.VK_S) {
-            for (int index = 0; index < blocks.size(); index += 1) {
-                blocks.get(index).x -= -rotatedForward.x;
-                blocks.get(index).z -= -rotatedForward.z;
-            }
+            WASDmove.decreaseBy(rotatedForward);
         }
         if (w.getKeyCode() == KeyEvent.VK_D) {
-            for (int index = 0; index < blocks.size(); index += 1) {
-                blocks.get(index).x -= -rotatedLeft.x;
-                blocks.get(index).z -= -rotatedLeft.z;
-            }
+            WASDmove.decreaseBy(rotatedLeft);
         }
         if (w.getKeyCode() == KeyEvent.VK_SHIFT) {
-            for (int index = 0; index < blocks.size(); index += 1) {
-                blocks.get(index).y -= 1;
-            }
+            WASDmove.decreaseBy(new point3DRotation(0.0,-1.0,0.0));
         }
         if (w.getKeyCode() == KeyEvent.VK_SPACE) {
-            for (int index = 0; index < blocks.size(); index += 1) {
-                blocks.get(index).y += 1;
-            }
+            WASDmove.decreaseBy(new point3DRotation(0.0,1.0,0.0));
         }
+
+        if(!hittingAnyBlock(blocks, WASDmove.x * 1.1, WASDmove.z * 1.1, WASDmove.y * 1.1)){
+            System.out.println("not hitting anything");
+            System.out.println("totoal move: " + WASDmove.x + " " + WASDmove.z);
+
+            for(Block block : blocks){
+                block.x -= WASDmove.x;
+                block.z -= WASDmove.z;
+                block.y -= WASDmove.y;
+            }
+        }else{
+            System.out.println("hit something");
+        }
+
         if (w.getKeyCode() == KeyEvent.VK_J) {
             canvas.testAngleHor -= 0.1;
         }

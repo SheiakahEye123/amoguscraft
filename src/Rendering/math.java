@@ -11,10 +11,7 @@ public class math {
         //updown rot
         double newnewY = y * Math.cos(verangle) - newX * Math.sin(verangle);
         newX = y * Math.sin(verangle) + newX * Math.cos(verangle);
-        point3DRotation returnPoint = new point3DRotation();
-        returnPoint.x = newX;
-        returnPoint.y = newnewY;
-        returnPoint.z = newZ;
+        point3DRotation returnPoint = new point3DRotation(newX,newnewY,newZ);
         return returnPoint;
     }
     public static project3Dto2D project3Dto2D(double x, double y, double z) {

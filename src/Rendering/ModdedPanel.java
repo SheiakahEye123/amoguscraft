@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ModdedPanel extends JPanel {
     ArrayList<Block> blocks;
@@ -28,7 +29,7 @@ public class ModdedPanel extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Collections.sort(blocks, (b1, b2) -> -Double.compare(b1.distance(), b2.distance()));
         brush.setColor(Color.black);
         for(var block : blocks) {
             block.pointRendering(testAngleHor, testAngleVer, brush);
