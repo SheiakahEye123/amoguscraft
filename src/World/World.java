@@ -8,19 +8,26 @@ import java.util.ArrayList;
 public class World {
     Block grass = new Block(0,0,0, 0.6, "grass");
     // World holds a list of all block to be drawn
-    public ArrayList<Block> blocks = new ArrayList<Block>();
+    public ArrayList<Chunk> chunks = new ArrayList<Chunk>();
     void createFlat() {
         int y = 0;
         for (int z = 0; z < 100; z += 1) {
             for (int x = 0; x < 100; x += 1)
-                blocks.add(new Block((double) x, (double) y, (double) z, 0.6, "grass"));
+                addBlockToChunk(new Block((double) x, (double) y, (double) z, 0.6, "grass"));
         }
     }
     void createWorld() {
         int y = 0;
         for (int z = 2; z < 100; z += 1) {
             for (int x = 2; x < 100; x += 1)
-                blocks.add(new Block((double) x, WorldGen.noise(x/50.0,z/50.0) * 5, (double) z, 0.6, "grass"));
+                addBlockToChunk(new Block((double) x, WorldGen.noise(x / 50.0, z / 50.0) * 5, (double) z, 0.6, "grass"));
+        }
+    }
+    void addBlockToChunk(Block Block) {
+        for(var chunk : chunks) {
+            if((int) (Block.x / 16)  == chunk.chunkx && (int) (Block.y / 16)  == chunk.chunky && (int) (Block.z / 16)  == chunk.chunkz) {
+                chunk.blocks[(int) (Block.x%16)][(int) (Block.y%16)][(int) (Block.z%16)] = Block;
+            }
         }
     }
     public World() {

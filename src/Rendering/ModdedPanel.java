@@ -11,11 +11,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import World.Chunk;
 
 public class ModdedPanel extends JPanel {
-    ArrayList<Block> blocks;
+    ArrayList<Chunk> chunks;
     public ModdedPanel(World world) {
-        this.blocks = world.blocks;
+        this.chunks = world.chunks;
     }
     public double testAngleHor = 0;
     public double testAngleVer = 0;
