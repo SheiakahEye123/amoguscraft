@@ -12,6 +12,12 @@ public class Block {
     public double y;
     public double z;
     public double Hardness;
+    Color top = new Color(218, 247, 166),
+            bottom = new Color(34,139,34),
+            front = new Color(255, 87, 51),
+            back = new Color(255, 87, 51),
+            left = new Color(199, 0, 57),
+            right = new Color(144, 12, 63);
     point[] sussyList = new point[]{
             new point(0, 0, 0, 0),
             new point(0, 0, 1, 0),
@@ -62,7 +68,7 @@ public class Block {
                 topFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
                 topFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
                 topFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
-                brush.setColor(new Color(218, 247, 166));
+                brush.setColor(bottom);
                 brush.fillPolygon(topFace);
             }
             if (sussyList[0].y + y >= 0) {
@@ -70,7 +76,7 @@ public class Block {
                 bottomFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
                 bottomFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
                 bottomFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
-                brush.setColor(new Color(34,139,34));
+                brush.setColor(top);
                 brush.fillPolygon(bottomFace);
             }
             if (sussyList[7].x + x <= 0) {
@@ -78,7 +84,7 @@ public class Block {
                 backFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
                 backFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
                 backFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
-                brush.setColor(new Color(255, 87, 51));
+                brush.setColor(back);
                 brush.fillPolygon(backFace);
             }
             if (sussyList[4].x + x >= 0) {
@@ -86,7 +92,7 @@ public class Block {
                 frontFace.addPoint((int) sussy2DArray[0].screenx, (int) sussy2DArray[0].screeny);
                 frontFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
                 frontFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
-                brush.setColor(new Color(199, 0, 57));
+                brush.setColor(front);
                 brush.fillPolygon(frontFace);
             }
             if (sussyList[4].z + z >= 0) {
@@ -94,7 +100,7 @@ public class Block {
                 leftFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
                 leftFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
                 leftFace.addPoint((int) sussy2DArray[0].screenx, (int) sussy2DArray[0].screeny);
-                brush.setColor(new Color(144, 12, 63));
+                brush.setColor(left);
                 brush.fillPolygon(leftFace);
             }
             if (sussyList[5].z + z <= 0){
@@ -102,7 +108,7 @@ public class Block {
                 rightFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
                 rightFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
                 rightFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
-                brush.setColor(new Color(88, 24, 69));
+                brush.setColor(right);
                 brush.fillPolygon(rightFace);
             }
         }

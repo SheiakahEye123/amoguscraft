@@ -21,7 +21,7 @@ public class amoguscraft {
        World world =  new World();
 
         ModdedPanel canvas = new ModdedPanel(world);
-        //frame.addKeyListener(new WASDListener(world.blocks, canvas));
+        frame.addKeyListener(new WASDListener(world.chunks, canvas));
         //frame.addMouseListener(new MouseListener(world.blocks, canvas));
         frame.add(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

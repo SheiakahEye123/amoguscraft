@@ -1,6 +1,8 @@
+
 package player;
 
 import Rendering.*;
+import World.Chunk;
 import blocks.Block;
 
 import java.awt.event.KeyEvent;
@@ -8,10 +10,10 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class WASDListener implements KeyListener{
-    ArrayList<Block> blocks = new ArrayList<>();
+    ArrayList<Chunk> chunks = new ArrayList<>();
     double speed = 0.6;
-    public WASDListener(ArrayList<Block> points, ModdedPanel canvas) {
-        this.blocks = points;
+    public WASDListener(ArrayList<Chunk> chunks, ModdedPanel canvas) {
+        this.chunks = chunks;
         this.canvas = canvas;
     }
 
@@ -19,15 +21,18 @@ public class WASDListener implements KeyListener{
     boolean hitting(double x, double y, double z) {
         return (x <= 0.75 && x >= -0.75 && z <= 0.75 && z >= -0.75 && y <= 0.75 && y >= -1.75);
     }
+    void chunksMovement () {
 
-    boolean hittingAnyBlock(ArrayList<Block> block, double movedX, double movedZ, double movedY) {
-        for (int index = 0; index < blocks.size(); index += 1){
-            if (hitting(blocks.get(index).x - movedX, blocks.get(index).y - movedY,blocks.get(index).z - movedZ)) {
+    }
+
+/*    boolean hittingAnyBlock(ArrayList<Block> block, double movedX, double movedZ, double movedY) {
+        for (int index = 0; index < chunks.size(); index += 1){
+            if (hitting(chunks.get(index).x - movedX, chunks.get(index).y - movedY,chunks.get(index).z - movedZ)) {
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -65,7 +70,7 @@ public class WASDListener implements KeyListener{
             WASDmove.decreaseBy(new point3DRotation(0.0,1.0,0.0));
         }
 
-        if(!hittingAnyBlock(blocks, WASDmove.x * 1.1, WASDmove.z * 1.1, WASDmove.y * 1.1)){
+/*        if(!hittingAnyBlock(blocks, WASDmove.x * 1.1, WASDmove.z * 1.1, WASDmove.y * 1.1)){
             System.out.println("not hitting anything");
             System.out.println("totoal move: " + WASDmove.x + " " + WASDmove.z);
 
@@ -76,7 +81,7 @@ public class WASDListener implements KeyListener{
             }
         }else{
             System.out.println("hit something");
-        }
+        }*/
 
         if (w.getKeyCode() == KeyEvent.VK_J) {
             canvas.testAngleHor -= 0.1;
@@ -97,3 +102,4 @@ public class WASDListener implements KeyListener{
 
     }
 }
+

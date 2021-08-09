@@ -1,6 +1,8 @@
 package World;
 
 import blocks.Block;
+import blocks.dirt;
+
 import java.util.ArrayList;
 
 // holds all things block-related
@@ -12,14 +14,14 @@ public class World {
         int y = 0;
         for (int z = 0; z < 100; z += 1) {
             for (int x = 0; x < 100; x += 1)
-                addBlockToChunk(new Block((double) x, (double) y, (double) z, 0.6, "grass"));
+                addBlockToChunk(new dirt((double) x, (double) y, (double) z));
         }
     }
     void createWorld() {
         int y = 0;
         for (int z = 2; z < 100; z += 1) {
             for (int x = 2; x < 100; x += 1)
-                addBlockToChunk(new Block((double) x, WorldGen.noise(x / 50.0, z / 50.0) * 5, (double) z, 0.6, "grass"));
+                addBlockToChunk(new dirt((double) x, WorldGen.noise(x / 50.0, z / 50.0) * 5 + 10, (double) z));
         }
     }
     void addBlockToChunk(Block Block) {
