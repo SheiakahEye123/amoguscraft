@@ -3,13 +3,14 @@ package blocks;
 import java.awt.*;
 
 public class dirt extends Block {
-    public dirt(double x, double y, double z) {
+    public dirt(int x, int y, int z) {
         super(x, y, z, 0.5, "blocks.dirt");
-        top = (new Color(0,74,0));
-        bottom = (new Color(139,69,19));
-        front = (new Color(139,69,19));
-        back = (new Color(139,69,19));
-        left = (new Color(139,69,19));
-        right = (new Color(139,69,19));
+
+        top =       new Color(50,130,30);
+        bottom =    new Color(100,69,29).darker();
+        front =     new Color(100,69,29);
+        back =      new Color(100,69,29).darker();
+        left =      new Color(100,69,29);
+    right =         new Color(100,69,29).darker();
     }
 }
