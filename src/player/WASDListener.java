@@ -43,8 +43,6 @@ public class WASDListener implements KeyListener{
     }
 
     boolean hittingAnyBlock(List<Chunk> chunks, double x, double y, double z){
-        System.out.println("============");
-
         for(int i = 0; i < chunks.size(); i++){
             var chunk = chunks.get(i);
             if(isInChunk(chunk, player.x, player.y, player.z)){
