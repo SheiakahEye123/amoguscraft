@@ -4,6 +4,7 @@ import Rendering.math;
 import Rendering.point;
 import Rendering.point3DRotation;
 import Rendering.project3Dto2D;
+import player.Player;
 
 import java.awt.*;
 
@@ -12,6 +13,7 @@ public class Block {
     public double y;
     public double z;
     public double Hardness;
+
     Color top = new Color(218, 247, 166),
             bottom = new Color(34,139,34),
             front = new Color(255, 87, 51),
@@ -31,11 +33,15 @@ public class Block {
     String id;
     boolean isVisible;
 
-    public double distance() {
-        return Math.sqrt(x * x + y * y + z * z);
+    public double distanceTo(Player player){
+        double deltaX = x - (int) player.x;
+        double deltaY = y - (int) player.y;
+        double deltaZ = z - (int) player.z;
+
+        return Math.sqrt(deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ);
     }
 
-    public void pointRendering(double testAngleHor, double testAngleVer, Graphics brush) {
+    public void pointRendering(Player player, double testAngleHor, double testAngleVer, Graphics brush) {
         project3Dto2D[] sussy2DArray = new project3Dto2D[8];
         point3DRotation[] sussy3DArray = new point3DRotation[8];
 
@@ -47,11 +53,16 @@ public class Block {
         // loop through all 8 points
         for (int index = 0; index < sussyList.length; index += 1) {
             // rotate the point based on the player's rotation (x and y)
-            point3DRotation rotation = math.point3DRotation(sussyList[index].x + x, sussyList[index].y + y, sussyList[index].z + z, testAngleHor, testAngleVer);
+            point3DRotation rotation = math.point3DRotation(
+                    sussyList[index].x + x - player.x,
+                    sussyList[index].y + y - player.y,
+                    sussyList[index].z + z - player.z,
+                    testAngleHor, testAngleVer);
             sussy3DArray[index] = rotation;
+
             // is the point visible?
             if (rotation.x > 0) {
-                // yes
+                // yes, we can proceed to project it
                 project3Dto2D pointforpoly = math.project3Dto2D(rotation.x, rotation.y, rotation.z);
                 sussy2DArray[index] = pointforpoly;
             } else {
@@ -63,7 +74,7 @@ public class Block {
 
         Polygon topFace = new Polygon(), leftFace = new Polygon(), rightFace = new Polygon(), bottomFace = new Polygon(), backFace = new Polygon(), frontFace = new Polygon();
         if (isVisible) {
-            if (sussyList[4].y + y <= 0) {
+            if (sussyList[4].y + y - player.y <= 0) {
                 topFace.addPoint((int) sussy2DArray[4].screenx, (int) sussy2DArray[4].screeny);
                 topFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
                 topFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
@@ -71,7 +82,7 @@ public class Block {
                 brush.setColor(bottom);
                 brush.fillPolygon(topFace);
             }
-            if (sussyList[0].y + y >= 0) {
+            if (sussyList[0].y + y - player.y >= 0) {
                 bottomFace.addPoint((int) sussy2DArray[0].screenx, (int) sussy2DArray[0].screeny);
                 bottomFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
                 bottomFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
@@ -79,7 +90,7 @@ public class Block {
                 brush.setColor(top);
                 brush.fillPolygon(bottomFace);
             }
-            if (sussyList[7].x + x <= 0) {
+            if (sussyList[7].x + x - player.x <= 0) {
                 backFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
                 backFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
                 backFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
@@ -87,7 +98,7 @@ public class Block {
                 brush.setColor(back);
                 brush.fillPolygon(backFace);
             }
-            if (sussyList[4].x + x >= 0) {
+            if (sussyList[4].x + x - player.x >= 0) {
                 frontFace.addPoint((int) sussy2DArray[4].screenx, (int) sussy2DArray[4].screeny);
                 frontFace.addPoint((int) sussy2DArray[0].screenx, (int) sussy2DArray[0].screeny);
                 frontFace.addPoint((int) sussy2DArray[1].screenx, (int) sussy2DArray[1].screeny);
@@ -95,7 +106,7 @@ public class Block {
                 brush.setColor(front);
                 brush.fillPolygon(frontFace);
             }
-            if (sussyList[4].z + z >= 0) {
+            if (sussyList[4].z + z - player.z >= 0) {
                 leftFace.addPoint((int) sussy2DArray[4].screenx, (int) sussy2DArray[4].screeny);
                 leftFace.addPoint((int) sussy2DArray[7].screenx, (int) sussy2DArray[7].screeny);
                 leftFace.addPoint((int) sussy2DArray[3].screenx, (int) sussy2DArray[3].screeny);
@@ -103,7 +114,7 @@ public class Block {
                 brush.setColor(left);
                 brush.fillPolygon(leftFace);
             }
-            if (sussyList[5].z + z <= 0){
+            if (sussyList[5].z + z - player.z <= 0){
                 rightFace.addPoint((int) sussy2DArray[5].screenx, (int) sussy2DArray[5].screeny);
                 rightFace.addPoint((int) sussy2DArray[6].screenx, (int) sussy2DArray[6].screeny);
                 rightFace.addPoint((int) sussy2DArray[2].screenx, (int) sussy2DArray[2].screeny);
@@ -113,7 +124,6 @@ public class Block {
             }
         }
     }
-        //System.out.println("block is drawing. one point is at " + sussy2DArray[0].screenx + " " + sussy2DArray[0].screeny);
 
     public Block(double x, double y, double z, double Hardness, String id){
         this.x = x;

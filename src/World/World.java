@@ -1,6 +1,7 @@
 package World;
 
 import blocks.Block;
+import blocks.sand;
 import blocks.dirt;
 
 import java.util.ArrayList;
@@ -14,31 +15,38 @@ public class World {
         int y = 0;
         for (int z = 0; z < 100; z += 1) {
             for (int x = 0; x < 100; x += 1)
-                addBlockToChunk(new dirt((double) x, (double) y, (double) z));
+                addBlockToChunk(new dirt(x, y, z));
         }
     }
     void createWorld() {
-        int y = 0;
-        for (int z = 2; z < 100; z += 1) {
-            for (int x = 2; x < 100; x += 1)
-                addBlockToChunk(new dirt((double) x, WorldGen.noise(x / 50.0, z / 50.0) * 5 + 10, (double) z));
+        for (int z = 2; z < 30; z += 1) {
+            for (int x = 2; x < 30; x += 1) {
+                int yHeight = (int) (WorldGen.noise(x / 30.0, z / 30.0) * 7) + 10;
+
+                if(yHeight < 12) addBlockToChunk(new dirt(x, yHeight, z));
+                else             addBlockToChunk(new sand(x, yHeight, z));
+            }
         }
     }
-    void addBlockToChunk(Block Block) {
+    public static boolean isInChunk(Chunk chunk, double x, double y, double z){
+        return ((int)x/16) == chunk.chunkx && ((int)y/16) == chunk.chunky && ((int)z/16) == chunk.chunkz;
+    }
+
+    void addBlockToChunk(Block block) {
         for(var chunk : chunks) {
-            if((int) (Block.x / 16)  == chunk.chunkx && (int) (Block.y / 16)  == chunk.chunky && (int) (Block.z / 16)  == chunk.chunkz) {
+            if(isInChunk(chunk, block.x, block.y, block.z)) {
                 chunk.blocks
-                        [(int) (blockCoordToArrayIndex(Block.x))]
-                        [(int) (blockCoordToArrayIndex(Block.y))]
-                        [(int) (blockCoordToArrayIndex(Block.z))] = Block;
+                        [(int) (blockCoordToArrayIndex(block.x))]
+                        [(int) (blockCoordToArrayIndex(block.y))]
+                        [(int) (blockCoordToArrayIndex(block.z))] = block;
                 return;
             }
         }
         // finished search, no chunks found
         // make a new chunk
-        chunks.add(new Chunk((int)(Block.x / 16), (int) (Block.y / 16), (int) (Block.z / 16)));
+        chunks.add(new Chunk((int)(block.x / 16), (int)(block.y / 16), (int)(block.z / 16)));
         // try again
-        addBlockToChunk(Block);
+        addBlockToChunk(block);
     }
 
     double blockCoordToArrayIndex(double coord){
@@ -49,9 +57,6 @@ public class World {
     }
 
     public World() {
-        // when a world object is created, it adds a new block to its list of blocks
-        //for (int index = 0; index < 1000; index += 1) {
-            //blocks.add(new Block(0, 0, Math.random() * 1000, 0, "sussyblock"));
         createWorld();
     }
 }
