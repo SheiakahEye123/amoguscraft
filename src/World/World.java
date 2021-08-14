@@ -1,8 +1,6 @@
 package World;
 
-import blocks.Block;
-import blocks.sand;
-import blocks.dirt;
+import blocks.*;
 
 import java.util.ArrayList;
 
@@ -23,8 +21,18 @@ public class World {
             for (int x = 2; x < 30; x += 1) {
                 int yHeight = (int) (WorldGen.noise(x / 30.0, z / 30.0) * 7) + 10;
 
-                if(yHeight < 12) addBlockToChunk(new dirt(x, yHeight, z));
-                else             addBlockToChunk(new sand(x, yHeight, z));
+                if(yHeight < 12) {
+                    addBlockToChunk(new dirt(x, yHeight, z));
+                    addBlockToChunk(new dirt(x, yHeight - 1, z));
+                    addBlockToChunk(new dirt(x, yHeight - 2, z));
+                    for(int i = 0; i < 10; i += 1) {
+                        addBlockToChunk(new stone(x, yHeight + i, z));
+                    }
+                }
+                else if(yHeight <= 12) addBlockToChunk(new sand(x, yHeight, z));
+                else if (yHeight == 13){
+                    addBlockToChunk(new water(x, yHeight, z));
+                }
             }
         }
     }
