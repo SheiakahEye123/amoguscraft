@@ -1,7 +1,6 @@
 package World;
 
 import blocks.*;
-
 import java.util.ArrayList;
 
 // holds all things block-related
@@ -17,21 +16,32 @@ public class World {
         }
     }
     void createWorld() {
+        int stoneHeight;
+        int dirtHeight;
         for (int z = 2; z < 30; z += 1) {
             for (int x = 2; x < 30; x += 1) {
                 int yHeight = (int) (WorldGen.noise(x / 30.0, z / 30.0) * 7) + 10;
-
                 if(yHeight < 12) {
                     addBlockToChunk(new dirt(x, yHeight, z));
-                    addBlockToChunk(new dirt(x, yHeight - 1, z));
-                    addBlockToChunk(new dirt(x, yHeight - 2, z));
-                    for(int i = 0; i < 10; i += 1) {
-                        addBlockToChunk(new stone(x, yHeight + i, z));
+                    addBlockToChunk(new dirt(x, dirtHeight = yHeight + 1, z));
+                    addBlockToChunk(new dirt(x, dirtHeight = yHeight + 2, z));
+                    for(stoneHeight = yHeight += 3; stoneHeight <= 17; stoneHeight += 1) {
+                        addBlockToChunk(new stone(x, stoneHeight, z));
                     }
                 }
-                else if(yHeight <= 12) addBlockToChunk(new sand(x, yHeight, z));
-                else if (yHeight == 13){
+                else if(yHeight <= 12) {
+                    addBlockToChunk(new sand(x, yHeight, z));
+                    addBlockToChunk(new sand(x, yHeight += 1, z));
+                    for (stoneHeight = yHeight += 1; stoneHeight <= 17; stoneHeight += 1) {
+                        addBlockToChunk(new stone(x, stoneHeight, z));
+                    }
+                }
+                else if (yHeight >= 13) {
                     addBlockToChunk(new water(x, yHeight, z));
+                    addBlockToChunk(new sand(x, yHeight + 1, z));
+                    for (stoneHeight = yHeight += 3; stoneHeight <= 17; stoneHeight += 1) {
+                        addBlockToChunk(new stone(x, stoneHeight, z));
+                    }
                 }
             }
         }
