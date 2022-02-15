@@ -12,7 +12,7 @@ public class Block {
     public double x;
     public double y;
     public double z;
-    public double Hardness;
+    private double hardness;
 
     Color top = new Color(218, 247, 166),
             bottom = new Color(34,139,34),
@@ -33,6 +33,12 @@ public class Block {
     String id;
     boolean isVisible;
 
+    /**
+    * Calculates the distance between this block and the player
+    *
+    * @param player the player to get the distance from
+     * @return the distance from that player calculated using the distance formula
+    */
     public double distanceTo(Player player){
         double deltaX = x - (int) player.x;
         double deltaY = y - (int) player.y;
@@ -129,10 +135,23 @@ public class Block {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.Hardness = Hardness;
+        this.hardness = Hardness;
         this.id = "amoguscraft:" + id;
     }
     void printName(){
         System.out.println(id);
     }
+
+    public double getHardness() {
+        return hardness;
+    }
+
+    public void setHardness(double hardness) {
+        if(hardness > 0){
+            this.hardness = hardness;
+        }else{
+            throw new IllegalArgumentException("hardness must be greater than 0 and less than bedrock");
+        }
+    }
+
 }

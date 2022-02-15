@@ -15,11 +15,11 @@ public class World {
                 addBlockToChunk(new dirt(x, y, z));
         }
     }
-    void createWorld() {
+    void createWorld(int chunknumz, int chunknumx) {
         int stoneHeight;
         int dirtHeight;
-        for (int z = 2; z < 30; z += 1) {
-            for (int x = 2; x < 30; x += 1) {
+        for (int z = 2; z < 30 + (chunknumz * 30); z += 1) {
+            for (int x = 2; x < 30 + (chunknumx * 30); x += 1) {
                 int yHeight = (int) (WorldGen.noise(x / 30.0, z / 30.0) * 7) + 10;
                 if(yHeight < 12) {
                     addBlockToChunk(new dirt(x, yHeight, z));
@@ -75,6 +75,7 @@ public class World {
     }
 
     public World() {
-        createWorld();
+        createWorld(0,0);
+        createWorld(1,1);
     }
 }
